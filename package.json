@@ -1,0 +1,28 @@
+{
+  "name": "url-shortener-microservice",
+  "version": "1.0.0",
+  "description": "Creates a short alias for a url",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BeardOfDan/URL-Shortener-Microservice.git"
+  },
+  "author": "Dan Roberts",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BeardOfDan/URL-Shortener-Microservice/issues"
+  },
+  "homepage": "https://github.com/BeardOfDan/URL-Shortener-Microservice#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.0.12"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.2"
+  }
+}
