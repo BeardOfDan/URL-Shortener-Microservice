@@ -21,7 +21,7 @@ app.get('/new/:url(*)', async (req, res, next) => {
     if (dbEntry) { // already have an entry
       res.send({ // send the user the existing alias for this url
         'original_url': dbEntry.fullUrl,
-        'short_url': dbEntry.shortUrl
+        'short_url': KEYS.baseUrl + dbEntry.shortId
       });
     } else { // this is a new url
       let miniId;
@@ -39,13 +39,13 @@ app.get('/new/:url(*)', async (req, res, next) => {
       // save the url aliasing in the db
       const savedUrl = await (new URL({
         'fullUrl': url,
-        'shortUrl': (KEYS.baseUrl + miniId),
+        'shortUrl': KEYS.baseUrl + miniId,
         'shortId': miniId
       })).save();
 
       res.send({ // send the user the newly created url alias
         'original_url': savedUrl.fullUrl,
-        'short_url': savedUrl.shortUrl
+        'short_url': KEYS.baseUrl + savedUrl.shortId
       });
     }
 
