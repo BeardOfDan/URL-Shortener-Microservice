@@ -25,12 +25,12 @@ app.get('/new/:url(*)', async (req, res, next) => {
         'short_url': dbEntry.shortUrl
       });
     } else { // this is a new url
-      let shortUrl;
+      let miniId;
 
       while (true) { // create a unique short url
-        shortUrl = shortID.generate().slice(0, 4); // limit it to 4 characters
+        miniId = shortID.generate().slice(0, 4); // limit it to 4 characters
 
-        const takenBy = await URL.findOne({ shortUrl });
+        const takenBy = await URL.findOne({ 'shortId': miniId });
 
         if (takenBy === null) { // if it's not taken, then go ahead and use it
           break;
@@ -40,7 +40,8 @@ app.get('/new/:url(*)', async (req, res, next) => {
       // save the url aliasing in the db
       const savedUrl = await (new URL({
         'fullUrl': url,
-        'shortUrl': shortUrl
+        'shortUrl': (KEYS.baseUrl + miniId),
+        'shortId': miniId
       })).save();
 
       res.send({ // send the user the newly created url alias
@@ -57,7 +58,7 @@ app.get('/new/:url(*)', async (req, res, next) => {
 app.get('/:url', async (req, res, next) => {
   const url = req.params.url;
 
-  const alias = await URL.findOne({ 'shortUrl': url });
+  const alias = await URL.findOne({ 'shortId': url });
 
   if (alias) {
     res.redirect(alias.fullUrl);
