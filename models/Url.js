@@ -3,7 +3,6 @@ const { Schema } = mongoose;
 
 const urlSchema = new Schema({
   'fullUrl': String,
-  'shortUrl': String,
   'shortId': String
 });
 
