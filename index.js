@@ -9,7 +9,6 @@ const PORT = process.env.PORT || 5000;
 
 require('mongoose').connect(KEYS.mongoURI);
 
-// mongoose model
 const URL = require('./models/Url');
 
 app.get('/new/:url(*)', async (req, res, next) => {
@@ -68,7 +67,18 @@ app.get('/:url', async (req, res, next) => {
 });
 
 app.get('/', (req, res, next) => {
-  res.send('url shortener microservice');
+  const htmlResponse = `<h1>url shortener microservice</h1>
+<hr />
+<br />
+<p>To make a new alias, go to <a href="#">${KEYS.baseUrl}new/Original-Long-Url</a></p>
+<p><strong>Note:</strong> The url you make an alias for must be valid and include the protocol (http/https)</p>
+<br />
+<h2>Example:</h2>
+<p>To make an alias for <a href="https://www.google.com">https://www.google.com</a></p>
+<p>Go to <a href="${KEYS.baseUrl}new/https://www.google.com">${KEYS.baseUrl}new/https://www.google.com</a></p>
+`;
+
+  res.send(htmlResponse);
 });
 
 app.listen(PORT, () => {
