@@ -20,9 +20,12 @@
   "homepage": "https://github.com/BeardOfDan/URL-Shortener-Microservice#readme",
   "dependencies": {
     "express": "^4.16.3",
-    "mongoose": "^5.0.12"
+    "mongoose": "^5.0.12",
+    "shortid": "^2.2.8",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
+    "dotenv": "^5.0.1",
     "nodemon": "^1.17.2"
   }
 }
